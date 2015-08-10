@@ -1,1 +1,6 @@
-fizzbuzztext
+<%= will_paginate %>
+  <% @main_pages.each do |item|%>
+    <p><%= item %></p>
+  <% end %>
+<%= will_paginate %>
+<%= button_to t(".btn_back"), root_path, method: :get, class: "btn btn-primary col-md-2" %>
