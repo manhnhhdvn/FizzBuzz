@@ -6,3 +6,5 @@ en:
       btn_2: "FizzBuzz with image"
     fizzbuzztext:
       btn_back: "Back"
+    fizzbuzzimage:
+      btn_back: "Back"

@@ -1,1 +1,12 @@
-fizzbuzzimage
+<%= will_paginate %>
+  <% @main_pages.each do |item|%>
+    <% if item == "Fizz" %>
+      <p><%= image_tag "fizz.png" %></p>
+    <% elsif item == "Buzz" %>
+      <p><%= image_tag "buzz.png" %></p>
+    <% else %>
+      <p><%= item %></p>
+    <% end %>
+  <% end %>
+<%= will_paginate %>
+<%= button_to t(".btn_back"), root_path, method: :get, class: "btn btn-primary col-md-2" %>
