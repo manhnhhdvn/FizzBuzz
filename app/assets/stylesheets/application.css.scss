@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+.pagination {
+  font-size: 12px;
+}
+
+.pagination > * {
+  margin-right: 0.1em;
+  padding: 0.3em 0.4em;
+}
+
+.pagination a:hover {
+  background: #428BCA none repeat scroll 0 0;
+  text-shadow: 1px 1px 1px #171717;
+}
+
+.pagination a:active {
+  text-shadow: none;
+}
+
+.pagination .current {
+  background: #428BCA none repeat scroll 0 0;
+  color: white;
+  text-shadow: 1px 1px 1px #171717;
+}
+
+.pagination .disabled {
+  color: #C0C0C0;
+}
