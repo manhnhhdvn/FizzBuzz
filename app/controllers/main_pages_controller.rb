@@ -1,5 +1,6 @@
 class MainPagesController < ApplicationController
   require "will_paginate/array"
+  require "json"
 
   def home
   end
@@ -10,6 +11,20 @@ class MainPagesController < ApplicationController
 
   def fizzbuzzimage
   	result
+  end
+
+  def directory
+  end
+
+  def getdata    
+    begin
+      data = showdirectory(params[:path])
+      render json: {message: data.to_json},
+             status: :ok
+    rescue
+      render json: {message: "Error"},
+             status: :internal_server_error      
+    end
   end
 
   private
@@ -34,5 +49,20 @@ class MainPagesController < ApplicationController
       end
     }
     @main_pages = array.paginate page: params[:page], per_page: 10
+  end
+
+  def showdirectory(path, name=nil)
+    data = {:parent => (name || path)}
+    data[:children] = children = []
+    Dir.foreach(path) do |entry|
+      next if (entry == '..' || entry == '.')
+      full_path = File.join(path, entry)
+      if File.directory?(full_path)
+        children << showdirectory(full_path, entry)
+      else
+        children << entry
+      end
+    end
+    return data
   end
 end

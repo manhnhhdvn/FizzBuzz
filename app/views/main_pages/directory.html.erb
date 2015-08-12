@@ -1,0 +1,67 @@
+<script type="text/javascript">
+  var space = "";
+  var understroke = "__";
+  var line = "|";
+  var symbol = "";
+  var view = "";
+  $(document).ready(function(){
+    $("#btnView").click(function(){
+      $.ajax({
+        url: "getdata",
+        type: "POST",
+        dataType: "json",
+        data: {authenticity_token: $("input[name=authenticity_token]").val(), path: $("#txtDirectory").val()},
+        success: function(data) {
+          var temp = jQuery.parseJSON(data.message);
+          view = $("#show").val();
+          showData(temp, 0);
+          var temp = "<p id=\"show\" >"+ view +"</p>";
+          $("#viewData").append(temp);
+        },
+        error: function(xhr, textStatus, errorThrown){
+        	$("#viewData").remove();
+          alert("Error!! Maybe\n1. Cannot find folder.\n2. Too much file and subfolder in your directory.\n3. You don't have permision to view this folder.\n");
+        }
+      });
+    })
+  });
+  function showData(data, deep){
+  	var parent;
+    space = "";
+    symbol = "";
+    $("#show").remove();
+  	if (deep == 0)
+      parent = "<p>"+data.parent+"</p>";
+    else
+    {
+    	for(var i = 0; i<deep; i++){
+        space = "&nbsp&nbsp&nbsp&nbsp";
+        symbol += space + line;
+      }
+      symbol += understroke;
+    	view += symbol + data.parent + "<br>";
+    }
+    $.each(data.children, function(index, element){
+      if(typeof element === "string")
+      {
+      	space = "";
+      	symbol = "";
+      	for(var i = 0; i<deep+1; i++){
+    		  space = "&nbsp&nbsp&nbsp&nbsp";
+    		  symbol += space + line;
+    	  }
+    	  symbol += understroke;
+      	view += symbol + element + "<br>";
+      }
+      else
+      {
+      	showData(element, deep+1);
+      }
+    })
+  }
+</script>
+<input type="text" id="txtDirectory" placeholder="Type directory"/>
+<button type="button" id="btnView">View</button>
+<div id="viewData">
+  <p id="show" ></p>
+</div>

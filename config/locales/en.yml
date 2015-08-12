@@ -4,6 +4,7 @@ en:
       h1: "Select one"
       btn_1: "FizzBuzz with text"
       btn_2: "FizzBuzz with image"
+      btn_3: "Select and view folder"
     fizzbuzztext:
       btn_back: "Back"
     fizzbuzzimage:
