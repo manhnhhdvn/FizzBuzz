@@ -1,14 +1,16 @@
-<%= will_paginate %>
-  <div style="padding-left: 5%;">
-    <% @main_pages.each do |item|%>
-      <% if item == "Fizz" %>
-        <p><%= image_tag "fizz.png" %></p>
-      <% elsif item == "Buzz" %>
-        <p><%= image_tag "buzz.png" %></p>
-      <% else %>
-        <p><%= item %></p>
-      <% end %>
+<div style="padding-left: 5%;">
+  <% @main_pages.each do |item|%>
+    <% if item == "Fizz" %>
+      <div><%= image_tag "fizz.png" %></div>
+    <% elsif item == "Buzz" %>
+      <div><%= image_tag "buzz.png" %></div>
+    <% elsif item == "FizzBuzz" %>
+      <div>
+        <span><%= image_tag "fizz.png" %><%= image_tag "buzz.png" %></span>
+      </div>
+    <% else %>
+      <div><%= item %></div>
     <% end %>
-  </div>
-<%= will_paginate %>
+  <% end %>
+</div>
 <%= button_to t(".btn_back"), root_path, method: :get, class: "btn btn-primary col-md-2" %>

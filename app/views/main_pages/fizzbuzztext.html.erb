@@ -1,8 +1,6 @@
-<%= will_paginate %>
   <div style="padding-left: 5%;">
     <% @main_pages.each do |item|%>
       <p><%= item %></p>
     <% end %>
   </div>
-<%= will_paginate %>
 <%= button_to t(".btn_back"), root_path, method: :get, class: "btn btn-primary col-md-2" %>

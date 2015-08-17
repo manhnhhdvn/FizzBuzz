@@ -6,11 +6,11 @@ class MainPagesController < ApplicationController
   end
 
   def fizzbuzztext
-    result
+    result_fizzbuzz_1
   end
 
   def fizzbuzzimage
-  	result
+  	result_fizzbuzz_2
   end
 
   def directory
@@ -28,27 +28,57 @@ class MainPagesController < ApplicationController
   end
 
   private
-  def fizz? number
+  def fizz1? number
     true if number%3 == 0
+  end
+
+  def fizz2? number
+    array_of_number = number.to_s.split(//)
+    check_fizz2 = false;
+    array_of_number.each do |item|
+      if item == "3"
+        check_fizz2 = true
+        break
+      end
+    end
+    return check_fizz2
   end
 
   def buzz? number
     true if number%5 == 0
   end
 
-  def result
+  def result_fizzbuzz_1
     array = []
     1000.times{|number|
-      if fizz? number + 1
+      if fizz1? number + 1
         array << "Fizz"
-        array << "Buzz" if buzz? number + 1
+        array[number] += "Buzz" if buzz? number + 1
       elsif buzz? number + 1
         array << "Buzz"
       else
         array << number + 1
       end
     }
-    @main_pages = array.paginate page: params[:page], per_page: 10
+    @main_pages = array
+  end
+
+  def result_fizzbuzz_2
+    array = []
+    1000.times{|number|
+      if fizz1? number + 1
+        array << "Fizz"
+        array[number] += "Buzz" if buzz? number + 1
+      elsif fizz2? number + 1
+        array << "Fizz"
+        array[number] += "Buzz" if buzz? number + 1
+      elsif buzz? number + 1
+        array << "Buzz"
+      else
+        array << number + 1
+      end
+    }
+    @main_pages = array
   end
 
   def showdirectory(path, name=nil)
